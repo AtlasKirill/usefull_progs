@@ -2,8 +2,8 @@
 #include <math.h>
 
 
-int signum_d_y(double d_y) {        //check the sigh of complex part of number
-	if (d_y < 0)
+int signum_number(double b) {        //check the sigh of complex part of number
+	if (b < 0)
 		return -1;
 	else
 		return 1;
@@ -57,10 +57,16 @@ Complex sqrtc(Complex a)
 {
 	Complex sample;
 	sample.x = sqrt((sqrt(a.x*a.x + a.y*a.y) + a.x) / 2);
-	sample.y = sqrt((sqrt(a.x*a.x + a.y*a.y) - a.x) / 2)* signum_d_y(a.y);
+	sample.y = sqrt((sqrt(a.x*a.x + a.y*a.y) - a.x) / 2)* signum_number(a.y);
 	return sample;
 }
 
+char checker (double a) {     //function which return the sign of complex part of number 
+	if (a < 0)
+		return '-';
+	if (a > 0)
+		return '+';
+}
 
 
 int main()
@@ -81,9 +87,9 @@ int main()
 
 	x1 = divs(sub(sqroot_d, b), num(a, 2));
 	x2 = divs(num(add(sqroot_d, b), -1), num(a, 2));
-	
-	printf("x1 = %lf + %lf *i\n", x1.x, x1.y);
-	printf("x2 = %lf + %lf *i\n", x2.x, x2.y);
+
+	printf("x1 = %lf %c %lf *i\n", x1.x,checker(x1.y), fabs(x1.y));
+	printf("x2 = %lf %c %lf *i\n", x2.x, checker(x2.y), fabs(x2.y));
 
 	return 0;
 }
